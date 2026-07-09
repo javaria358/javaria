@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 from django import forms
 from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
@@ -75,7 +75,7 @@ class SignUpForm(UserCreationForm):
                 # if models aren't migrated yet, skip gracefully
                 pass
         return user
-=======
+
 from django import forms
 from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
@@ -210,4 +210,4 @@ class SignUpForm(UserCreationForm):
                 pass
 
         return user
->>>>>>> master
+
