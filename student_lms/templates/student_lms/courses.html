@@ -1,0 +1,26 @@
+{% extends 'student_lms/base.html' %}
+{% block title %}Courses | GCTW LMS{% endblock %}
+{% block content %}
+<div class="mb-4">
+  <div class="section-title"><h2 class="h3">Available Courses</h2></div>
+  <p class="text-muted-strong">Browse the current course catalog for the semester. Click any course to view the full details and learning outcomes.</p>
+</div>
+<div class="row g-4">
+  {% for course in courses %}
+  <div class="col-md-6 col-lg-4">
+    <div class="course-card p-4 h-100 d-flex flex-column justify-content-between">
+      <div>
+        <span class="course-badge">{{ course.code }}</span>
+        <h3 class="h5 mt-3">{{ course.name }}</h3>
+        <p class="mb-2 text-muted-strong">{{ course.instructor }}</p>
+        <p class="mb-0">{{ course.description }}</p>
+      </div>
+      <div class="mt-4 d-flex justify-content-between align-items-center gap-2">
+        <a href="{% url 'course_detail' course.code %}" class="btn btn-outline-secondary btn-sm">View details</a>
+        <span class="badge rounded-pill bg-secondary-subtle text-dark">Semester {{ course.semester }}</span>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
