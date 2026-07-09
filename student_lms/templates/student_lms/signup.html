@@ -1,0 +1,89 @@
+{% extends 'student_lms/base.html' %}
+{% load static %}
+{% block title %}Sign Up | GCTW LMS{% endblock %}
+{% block content %}
+<div class="row justify-content-center py-5">
+  <div class="col-lg-6">
+    <div class="card p-4 shadow-sm border-0">
+      <div class="mb-4">
+        <h1 class="h3">Create an account</h1>
+        <p class="text-muted-strong">Register as a student or administrator to access the college portal.</p>
+      </div>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+        {% endif %}
+        {% for field in form %}
+          {% if field.name == 'role' %}
+            <div class="mb-3">
+              <label class="form-label">{{ field.label }}</label>
+              <div>
+                {% for subwidget in field %}
+                  <div class="form-check">
+                    {{ subwidget.tag }}
+                    <label class="form-check-label" for="{{ subwidget.id_for_label }}">{{ subwidget.choice_label }}</label>
+                  </div>
+                {% endfor %}
+              </div>
+              {% if field.help_text %}
+                <div class="form-text">{{ field.help_text }}</div>
+              {% endif %}
+              {% for error in field.errors %}
+                <div class="text-danger small">{{ error }}</div>
+              {% endfor %}
+            </div>
+          {% elif field.name == 'admin_code' %}
+            <div class="mb-3" id="admin-code-wrapper" style="display:none;">
+              <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field }}
+              {% if field.help_text %}
+                <div class="form-text">{{ field.help_text }}</div>
+              {% endif %}
+              {% for error in field.errors %}
+                <div class="text-danger small">{{ error }}</div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="mb-3">
+              <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field }}
+              {% if field.help_text %}
+                <div class="form-text">{{ field.help_text }}</div>
+              {% endif %}
+              {% for error in field.errors %}
+                <div class="text-danger small">{{ error }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endfor %}
+        <button class="btn btn-gold btn-lg w-100" type="submit">Sign up</button>
+      </form>
+      <p class="mt-3 text-center text-muted-strong">Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
+    </div>
+  </div>
+</div>
+<script>
+// Toggle admin code visibility based on selected role
+document.addEventListener('DOMContentLoaded', function () {
+  function updateAdminField() {
+    const adminWrapper = document.getElementById('admin-code-wrapper');
+    const roleInputs = document.querySelectorAll('input[name="role"]');
+    let selected = null;
+    roleInputs.forEach(function (r) { if (r.checked) selected = r.value; });
+    if (selected === 'admin') {
+      adminWrapper.style.display = '';
+    } else {
+      adminWrapper.style.display = 'none';
+      // clear admin code when hidden
+      const adminInput = adminWrapper.querySelector('input');
+      if (adminInput) adminInput.value = '';
+    }
+  }
+  document.querySelectorAll('input[name="role"]').forEach(function (el) {
+    el.addEventListener('change', updateAdminField);
+  });
+  updateAdminField();
+});
+</script>
+{% endblock %}
