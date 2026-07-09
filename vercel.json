@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "project_name/wsgi.py",
+      "src": "student_lms/wsgi.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "project_name/wsgi.py"
+      "dest": "student_lms/wsgi.py"
     }
   ]
 }
