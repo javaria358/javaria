@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'student_lms/base.html' %}
 {% block title %}Home | GCTW LMS{% endblock %}
 {% block content %}
@@ -52,3 +53,59 @@
   </div>
 </div>
 {% endblock %}
+=======
+{% extends 'student_lms/base.html' %}
+{% block title %}Home | GCTW LMS{% endblock %}
+{% block content %}
+<div class="row align-items-center py-5">
+  <div class="col-lg-6">
+    <span class="badge rounded-pill" style="background:#C79A2A; color:#1C2B4A;">Welcome to GCTW LMS</span>
+    <h1 class="display-6 mt-4 mb-3">A modern campus portal for courses, schedules, and progress tracking.</h1>
+    <p class="lead text-muted-strong mb-4">Explore course offerings, check details, and access consistent campus navigation with a polished Bootstrap layout.</p>
+    <div class="d-flex flex-column flex-sm-row gap-3">
+      <a href="{% url 'courses' %}" class="btn btn-gold btn-lg">Browse courses</a>
+      <a href="{% url 'about' %}" class="btn btn-outline-secondary btn-lg">Learn more</a>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card rounded-4 shadow-sm p-4 border-0">
+      <div class="row row-cols-1 row-cols-sm-2 g-3">
+        {% for course in courses %}
+        <div class="col">
+          <div class="p-4 h-100 course-card">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <span class="course-badge">{{ course.code }}</span>
+              <span class="badge bg-secondary-subtle text-dark">Sem {{ course.semester }}</span>
+            </div>
+            <h3 class="h6 mb-2">{{ course.name }}</h3>
+            <p class="mb-3 text-muted-strong">{{ course.instructor }}</p>
+            <a href="{% url 'course_detail' course.code %}" class="stretched-link text-decoration-none fw-semibold">View course details →</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row g-4 mt-5">
+  <div class="col-lg-4">
+    <div class="feature-card p-4 h-100">
+      <h3 class="h5">Course catalog</h3>
+      <p class="mb-0 text-muted-strong">A clean course listing with easy access to course detail pages.</p>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="feature-card p-4 h-100">
+      <h3 class="h5">Responsive design</h3>
+      <p class="mb-0 text-muted-strong">Optimized for mobile and desktop with Bootstrap navigation and layout.</p>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="feature-card p-4 h-100">
+      <h3 class="h5">Shared template</h3>
+      <p class="mb-0 text-muted-strong">All pages extend a unified `base.html` layout with navbar and footer.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+>>>>>>> master

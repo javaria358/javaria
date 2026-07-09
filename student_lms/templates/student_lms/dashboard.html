@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'student_lms/base.html' %}
 {% block title %}Dashboard | GCTW LMS{% endblock %}
 {% block content %}
@@ -116,3 +117,123 @@
   </div>
 </div>
 {% endblock %}
+=======
+{% extends 'student_lms/base.html' %}
+{% block title %}Dashboard | GCTW LMS{% endblock %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-3">
+    <aside class="p-3 position-sticky" style="top:1rem;">
+      <div class="card p-3 course-card">
+        <div class="d-flex align-items-center gap-3">
+          <div class="rounded-circle bg-secondary" style="width:56px;height:56px;"></div>
+          <div>
+            <div class="fw-semibold">{{ request.user.first_name|default:request.user.username }}</div>
+            <small class="text-muted-strong">{{ role }}</small>
+          </div>
+        </div>
+        <hr class="my-3">
+        <nav class="nav flex-column">
+          <a class="nav-link text-muted" href="{% url 'dashboard' %}">Dashboard</a>
+          <a class="nav-link text-muted" href="{% url 'courses' %}">My Courses</a>
+          <a class="nav-link text-muted" href="#">Assignments</a>
+          <a class="nav-link text-muted" href="#">Timetable</a>
+          <a class="nav-link text-muted" href="#">Results</a>
+          <a class="nav-link text-muted" href="{% url 'logout' %}">Sign out</a>
+        </nav>
+      </div>
+    </aside>
+  </div>
+
+  <div class="col-lg-9">
+    <div class="card p-4 hero">
+      <div class="d-flex justify-content-between align-items-start gap-3">
+        <div>
+          <h1 class="h3 mb-1">Welcome back, {{ request.user.first_name|default:request.user.username }}!</h1>
+          <p class="mb-0">Here's a snapshot of your coursework and what needs your attention this week.</p>
+        </div>
+        <div class="text-end">
+          <div class="display-6">8.7</div>
+          <div class="small text-muted">Current CGPA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4 g-3">
+      <div class="col-md-3">
+        <div class="feature-card p-3 text-center">
+          <div class="fw-bold">92%</div>
+          <div class="small text-muted">Attendance</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="feature-card p-3 text-center">
+          <div class="fw-bold">7 of 10</div>
+          <div class="small text-muted">Modules completed</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="feature-card p-3 text-center">
+          <div class="fw-bold">4</div>
+          <div class="small text-muted">Pending assignments</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="feature-card p-3 text-center">
+          <div class="fw-bold">3</div>
+          <div class="small text-muted">Unread notices</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4 g-4">
+      <div class="col-lg-8">
+        <div class="section-title"><h3 class="h5">My Courses</h3></div>
+        <div class="row g-3">
+          {% for course in courses %}
+          <div class="col-md-6">
+            <div class="course-card p-3 h-100">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="course-badge">{{ course.code }}</div>
+                  <h4 class="h6 mt-2 mb-1">{{ course.name }}</h4>
+                  <div class="small text-muted">{{ course.instructor }}</div>
+                </div>
+                <div class="text-end">
+                  <div class="small text-muted">Credits</div>
+                  <div class="fw-semibold">{{ course.credits }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="col-12">
+            <div class="feature-card p-3">No courses found.</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="section-title"><h3 class="h5">Upcoming Deadlines</h3></div>
+        <div class="card p-3">
+          <ul class="list-unstyled mb-0">
+            <li class="mb-3">
+              <div class="fw-semibold">Normalization Assignment</div>
+              <div class="small text-muted">CIT302 — Due Sep 12</div>
+            </li>
+            <li class="mb-3">
+              <div class="fw-semibold">Socket Programming Lab</div>
+              <div class="small text-muted">CIT304 — Due Sep 15</div>
+            </li>
+            <li>
+              <div class="fw-semibold">React Mini Project</div>
+              <div class="small text-muted">CIT304 — Due Sep 21</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+>>>>>>> master
